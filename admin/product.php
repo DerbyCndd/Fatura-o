@@ -33,9 +33,7 @@
                             <?php foreach ($products as $productItem) : ?>
                                 <tr>
                                     <td><?= $productItem['id'] ?> </td>
-                                    <td>
-                                        <img src="../<?= $productItem['image']; ?> "style="width:50px; height:50px"   alt="img">
-                                    </td>
+                                   
                                     <td><?= $productItem['name'] ?> </td>
                                     <td>
                                     <td>

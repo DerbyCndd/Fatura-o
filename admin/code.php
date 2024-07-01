@@ -106,37 +106,21 @@ if(isset($_POST['saveProduct'])){
     $status = isset($_POST['status']) == true ? 1 : 0;
 
 
-    if($_FILES['image']['size'] > 0){
-
-        $path = "../assets/uplads/products";
-        $image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-        $filename = time().'.'.$image_ext;
-        move_uploaded_file($_FILES['image']['temp_name'], $path."/".$filename);
-        $finalImage = "../assets/uplads/products".$filename ;
-        
-    }else{
-
-        $finalImage = '';
-
-    }
+    
 
     $data = [
-        'category_id' => $category_id,
+        'category_id' =>(int) $category_id,
         'name' => $name,
         'description' => $description,
-        'price' => $price,
-        'quantity' => $quantity,
-        'image' => $finalImage,
+        'price' => (int)$price,
+        'quantity' => (int)$quantity,
         'status' => $status
     ];
     
-    $result = insert('products', $data);
+    registar($data);
+    redirect('products-create.php?id='.$product_id, 'Update Created');
+
     
-    if($result){
-        redirect('product.php', 'Product Created');
-    } else {
-        redirect('products-create.php', 'Something Went Wrong');
-    }
 }
 
 if(isset($_POST['updateProduct'])){
@@ -149,7 +133,7 @@ if(isset($_POST['updateProduct'])){
         redirect('product.php','No such product found');
     }
 
-    $category_id = validate($_POST['category_id']);
+    $category_id = validate($_POST['categoryid']);
     $name = validate($_POST['name']);
     $description = validate($_POST['description']);
     $price = validate($_POST['price']);
@@ -157,43 +141,19 @@ if(isset($_POST['updateProduct'])){
     $status = isset($_POST['status']) == true ? 1 : 0;
 
 
-    if($_FILES['image']['size'] > 0){
-
-        $path = "../assets/uplads/products";
-        $image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-        $filename = time().'.'.$image_ext;
-        move_uploaded_file($_FILES['image']['temp_name'], $path."/".$filename);
-        $finalImage = "../assets/uplads/products".$filename ;
-        
-        $deleteImage = "../".$productData['data']['image'];
-
-        if(file_exists($deleteImage)){
-            unlink($deleteImage);
-        }
-    }else{
-
-        $finalImage = $productData['data']['image'];
-
-    }
-
     $data = [
-        'category_id' => $category_id,
+        'categoryid' => $category_id,
         'name' => $name,
         'description' => $description,
-        'price' => $price,
-        'quantity' => $quantity,
-        'image' => $finalImage,
+        'price' => (int)$price,
+        'quantity' => (int)$quantity,
         'status' => $status
     ];
-    
-    $result = update('products', $product_id, $data);
-    
-    if($result){
-        redirect('products-edit.php?id='.$product_id, 'Update Created');
-    } else {
-        redirect('products-edit.php?id='.$product_id, 'Something Went Wrong');
-    }
 
+    
+        updateProduct($data, $productId); 
+        redirect('products-edit.php?id='.$product_id, 'Update Created');
+    
 }
 
 

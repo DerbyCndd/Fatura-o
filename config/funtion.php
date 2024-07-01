@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include_once '../config/conexao.php';
 require 'dbcon.php';
 function validate($inputData)
 {
@@ -44,6 +44,23 @@ function insert($tableName, $data)
     return $result;
 }
 
+ function registar($data) {
+    
+    $sql = 'INSERT INTO products (categoryid, name, description,price, quantity, status ) VALUES (?,?,?,?,?,?)';
+
+    $stmt = Conexao::getConn()->prepare($sql);
+    $stmt->bindValue(1, $data['category_id']);
+    $stmt->bindValue(2, $data['name']);
+    $stmt->bindValue(3, $data['description']);
+    $stmt->bindValue(4, $data['price']);
+    $stmt->bindValue(5, $data['quantity']);
+    $stmt->bindValue(6, $data['status']);
+
+    $stmt->execute();
+
+}
+
+
 function update($tableName, $id,$data){
     
     global $conn;
@@ -62,6 +79,38 @@ function update($tableName, $id,$data){
     $result = mysqli_query($conn,$query);
     return $result;
 }
+
+function updateProduct($data, $id) {
+    try {
+        $sql = 'UPDATE products SET categoryid = :categoryid, name = :name, description = :description, price = :price, quantity = :quantity, status = :status WHERE id = :id';
+
+        $conn = Conexao::getConn(); // Verifique se a conexão está sendo obtida corretamente
+        $stmt = $conn->prepare($sql);
+
+        // Verifique se os parâmetros estão sendo passados corretamente
+        $stmt->bindParam(':categoryid', $data['categoryid']);
+        $stmt->bindParam(':name', $data['name']);
+        $stmt->bindParam(':description', $data['description']);
+        $stmt->bindParam(':price', $data['price']);
+        $stmt->bindParam(':quantity', $data['quantity']);
+        $stmt->bindParam(':status', $data['status']);
+        $stmt->bindParam(':id', $id); 
+        
+        // Execute a query
+        $stmt->execute();
+
+        // Verifique se a atualização foi bem-sucedida
+        if ($stmt->rowCount() > 0) {
+            echo "Produto atualizado com sucesso!";
+        } else {
+            echo "Nenhum produto atualizado.";
+        }
+    } catch (PDOException $e) {
+        echo "Erro ao atualizar produto: " . $e->getMessage();
+    }
+}
+
+
 
 
 function getAll($tableName, $status = NULL){
@@ -157,4 +206,16 @@ function logoutSession(){
     unset($_SESSION['loggedInUser']);
 }
 
+
+function jsonResponse($status, $status_type, $message){
+
+    $response = [
+        'status' => $status,
+        'status_type '=> $status_type,
+        'message' => $message
+    ];
+    echo json_encode($response);
+    return;
+
+}
 ?>

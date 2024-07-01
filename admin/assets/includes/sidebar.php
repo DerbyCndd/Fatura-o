@@ -9,7 +9,7 @@
                     Dashboard
                 </a>
                 
-                <a class="nav-link" href="orders-creat.php">
+                <a class="nav-link" href="order-creat.php">
                     <div class="sb-nav-link-icon"><i class="fas fa-bell-alt"></i></div>
                     Creat Order
                 </a>

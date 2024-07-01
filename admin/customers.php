@@ -42,12 +42,12 @@
                                             echo '<span class="badge bg-primary" >Visible</span>';
                                         }
                                         ?>
+                                         <a href="admins-edit.php?id=<?= $custItem['id']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                        <a href="admins-delete.php?id=<?= $custItem['id']; ?>" class="btn btn-danger btn-sm">Delete</a>
 
                                     </td>
 
-                                        <a href="admins-edit.php?id=<?= $custItem['id']; ?>" class="btn btn-success btn-sm">Edit</a>
-                                        <a href="admins-delete.php?id=<?= $custItem['id']; ?>" class="btn btn-danger btn-sm">Delete</a>
-
+                                       
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

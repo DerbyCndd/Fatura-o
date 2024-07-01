@@ -46,20 +46,16 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="">Price *</label>
-                        <input type="text" name="price" required class="form-control" />
+                        <input type="number" name="price" required class="form-control" />
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="">Quantity *</label>
-                        <input type="text" name="quantity" required class="form-control" />
-                    </div>
-                   <div class="col-md-4 mb-3">
-                        <label for="">Image </label>
-                        <input type="file" name="image" class="form-control" />
+                        <input type="number" name="quantity" required class="form-control" />
                     </div>
                     <div class="col-md-6">
                         <label>Status (UnChecked=Visible,Cheked=Hidden)</label>
                         <br />
-                        <input type="Cheked" name="status" style="width:30px;height:30px" ;>
+                        <input type="checkbox" name="status" style="width:30px;height:30px" ;>
 
                     </div>
                     <div class="col-md-6 mb-3 text-end">

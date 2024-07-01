@@ -30,8 +30,7 @@
 
                             <div class="col-md-12 mb-3">
                                 <label>Select Category Id</label>
-                                <select name="category_id" class="form-select">
-                                    <option value="">Select Category</option>
+                                <select name="categoryid" class="form-select">
                                     <?php
                                     $categories = getAll('categories');
                                     if ($categories) {
@@ -42,7 +41,7 @@
                                     ?>
                                                 <option value="<?= $cateItem['id'] ?>">
 
-                                                    <?= $product['data']['category_id'] == $cateItem['id']  ? 'selected' : '' ;?>"
+                                                    <?= $product['data']['categoryid'] == $cateItem['id']  ? '' : '' ;?>
 
                                                     <?=$cateItem['name'];?>
                                                 </option>
@@ -67,17 +66,13 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="">Price *</label>
-                                <input type="text" name="price" required value="<?= $product['data']['price'] ?>" class="form-control" />
+                                <input type="number" name="price" required value="<?= $product['data']['price'] ?>" class="form-control" />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="">Quantity *</label>
-                                <input type="text" name="quantity" required value="<?= $product['data']['quantity'] ?>" class="form-control" />
+                                <input type="number" name="quantity" required value="<?= $product['data']['quantity'] ?>" class="form-control" />
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="">Image </label>
-                                <input type="file" name="image" class="form-control" />
-                                <img src="../<?= $product['data']['image'] ?>" style="width:40px; height:40px" alt="Img">
-                            </div>
+                           
                             <div class="col-md-6">
                                 <label>Status (UnChecked=Visible,Cheked=Hidden)</label>
                                 <br />
