@@ -85,7 +85,7 @@
                                                 <button class="input-group-text increment " >+</button>
                                             </div>
                                         </td>
-                                        <td><?= $Item['price'] * $Item['quantity'];?></td>
+                                        <td id="total"><?= $Item['price'] * $Item['quantity'];?></td>
                                         <td>
                                         <a href="order-item-delete.php?index=<?= $key ?>" class="btn btn-danger">Remove</a>
                                         </td>

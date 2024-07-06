@@ -1,7 +1,8 @@
 <?php
+include_once 'conexao.php';
+require_once 'dbcon.php';
 session_start();
-include_once '../config/conexao.php';
-require 'dbcon.php';
+
 function validate($inputData)
 {
     global $conn;
