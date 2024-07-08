@@ -12,7 +12,7 @@
             <form action="orders-code.php" method="POST">
                 <div class="row">
                     <div class="col-md-3 mb-3">
-                        <label for="">Select Product</label>
+                        <label>Select Product</label>
                         <select name="product_id" class="form-select">
                             <option value="">--Select Product--</option>
                             <?php
@@ -36,7 +36,7 @@
                         </select>
                     </div>
                     <div class="col-md-2 mb-3">
-                        <label for="">Quantity</label>
+                        <label>Quantity</label>
                         <input type="number" name="quantity" value="1" class="form-control" >
                     </div>
                     <div class="col-md-3 mb-3 text-end">
@@ -56,7 +56,12 @@
                 <?php
                     if(isset($_SESSION['productItems'])){
                         $sessionProducts = $_SESSION['productItems'];
-                        ?>
+                        if(empty($sessionProducts)){
+                            unset($_SESSION['productItemIds']);
+                            unset($_SESSION['productItems']);
+                        }
+
+                        ?>  
                         <div class="table-responsive mb-3">
                             <table class="table table-bordered table-striped ">
                                 <thead>
@@ -93,6 +98,29 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
+                        </div>
+
+                        <div class="mt-2">
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Select payment mode</label>
+                                    <select id="payment_mode" class="form-select">
+                                        <option>-- Select Payment --</option>
+                                        <option value="Cash Payment">Cash Payment</option>
+                                        <option value="Online Payment">Online Payment</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Enter customer phone number</label>
+                                    <input type="number" id="cphone" class="form-control" value="" >
+                                </div>
+                                <div class="col-md-4">
+                                    <br/>
+                                    <button type="button" class="btn btn-warning w-100 proceedToPlace" >Proceed to place order</button>
+                                </div>
+                            </div>
                         </div>
                         <?php
                     }else{
