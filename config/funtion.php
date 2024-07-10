@@ -216,7 +216,7 @@ function jsonResponse($status, $status_type, $message){
         'message' => $message
     ];
     echo json_encode($response);
-    return;
+    
 
 }
 ?>
